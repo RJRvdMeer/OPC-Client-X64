@@ -151,7 +151,7 @@ void COPCItem::getSupportedProperties(std::vector<CPropertyDescription> &desc){
 	VARTYPE *pvtDataTypes;
 
 	USES_CONVERSION;
-	HRESULT res = group.getServer().getPropertiesInterface()->QueryAvailableProperties(T2OLE(name.c_str()), &noProperties, &pPropertyIDs, &pDescriptions, &pvtDataTypes);
+	HRESULT res = group.getServer().getPropertiesInterface()->QueryAvailableProperties(CT2OLE(name.c_str()), &noProperties, &pPropertyIDs, &pDescriptions, &pvtDataTypes);
 	if (FAILED(res)){
 		throw OPCException("Failed to restrieve properties", res);
 	}
@@ -180,7 +180,7 @@ void COPCItem::getProperties(const std::vector<CPropertyDescription> &propsToRea
 	propsRead.SetCount(noProperties);
 	
 	USES_CONVERSION;
-	HRESULT res = group.getServer().getPropertiesInterface()->GetItemProperties(T2OLE(name.c_str()), noProperties, pPropertyIDs, &pValues, &pErrors);
+	HRESULT res = group.getServer().getPropertiesInterface()->GetItemProperties(CT2OLE(name.c_str()), noProperties, pPropertyIDs, &pValues, &pErrors);
 	delete []pPropertyIDs;
 	if (FAILED(res)){
 		throw OPCException("Failed to restrieve property values", res);

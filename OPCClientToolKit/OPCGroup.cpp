@@ -199,7 +199,7 @@ name(groupName),
 opcServer(server)
 {
 	USES_CONVERSION;
-	WCHAR* wideName = T2OLE(groupName.c_str());
+	WCHAR* wideName = CT2OLE(groupName.c_str());
 
 
 	HRESULT result = opcServer.getServerInterface()->AddGroup(wideName, active, reqUpdateRate_ms, 0, 0, &deadBand,
@@ -352,7 +352,7 @@ int COPCGroup::addItems(std::vector<std::string>& itemName, std::vector<COPCItem
 	for (; i < itemName.size(); i++){
 		itemsCreated[i] = new COPCItem(itemName[i],*this);
 		USES_CONVERSION;
-		WCHAR* wideName = T2OLE(itemName[i].c_str());
+		WCHAR* wideName = CT2OLE(itemName[i].c_str());
 		itemDef[i].szItemID = wideName;
 		itemDef[i].szAccessPath = NULL;//wideName;
 		itemDef[i].bActive = active;

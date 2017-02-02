@@ -59,8 +59,8 @@ void CRemoteHost::makeRemoteObject(const IID requestedClass, const IID requested
 	ZeroMemory(&remoteServerInfo, sizeof(COSERVERINFO));
 	remoteServerInfo.pAuthInfo = &athn;
 	USES_CONVERSION;
-	remoteServerInfo.pwszName = T2OLE(host.c_str());
-	//printf("%s\n", OLE2T(remoteServerInfo.pwszName));
+	remoteServerInfo.pwszName = CT2OLE(host.c_str());
+	//printf("%s\n", COLE2T(remoteServerInfo.pwszName));
 
 	MULTI_QI reqInterface;
 	reqInterface.pIID = &requestedInterface;
@@ -177,8 +177,8 @@ void CRemoteHost::getListOfDAServers(CATID cid, std::vector<std::string>& listOf
 		else
 		{
 			USES_CONVERSION;
-			char* str = OLE2T(progID);
-			char* str1 = OLE2T(userType);
+			char* str = COLE2T(progID);
+			char* str1 = COLE2T(userType);
 			//printf("Adding %s\n", str);
 			listOfProgIDs.push_back(str);
 			COPCClient::comFree(progID);
@@ -196,7 +196,7 @@ CLocalHost::CLocalHost()
 COPCServer* CLocalHost::connectDAServer(const std::string& serverProgID)
 {
 	USES_CONVERSION;
-	WCHAR* wideName = T2OLE(serverProgID.c_str());
+	WCHAR* wideName = CT2OLE(serverProgID.c_str());
 
 	CLSID clsid;
 	HRESULT result = CLSIDFromProgID(wideName, &clsid);
@@ -264,7 +264,7 @@ void CLocalHost::getListOfDAServers(CATID cid, std::vector<std::string>& listOfP
 		else
 		{
 			USES_CONVERSION;
-			char* str = OLE2T(progID);
+			char* str = COLE2T(progID);
 			listOfProgIDs.push_back(str);
 			COPCClient::comFree(progID);
 		}
